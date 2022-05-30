@@ -27,12 +27,20 @@ public:
 	}
 	void Add_Vertex(TVertex tmp_source) {
 		if (Index(tmp_source) != -1) {
-			vertex new_vertex;
-			new_vertex.id_v = table.size();
-			new_vertex.data = tmp_source;
-			table.push_back(tmp_source);
+			vertex temp_vertex;
+			temp_vertex.id_v = table.size();
+			temp_vertex.data = tmp_source;
+			table.push_back(temp_vertex);
 		}
 		else throw "That vertex already exists."
 	};
-
+	void Add_Edge(TVertex source, TVertex dest,TEdge Edge){
+		if (Index(source) == -1) throw "Source not exist";
+		if (Index(dest) == -1) throw "Destenation not exist";
+		destination tmp_dest;
+		tmp_dest.id_d = Index(dest);
+		tmp_dest.dest = dest;
+		tmp_dest.edge = Edge;
+		table[Index(source)].dest.push_back(tmp_dest);
+	}
 };
