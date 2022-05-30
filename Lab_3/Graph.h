@@ -17,12 +17,22 @@ private:
 	};
 	vector<vertex> table;
 public:
-	int Index(TVertex Temp_Vertex)
+	int Index(TVertex tmp_vertex)
 	{
 		for (size_t i = 0; i < table.size(); i++)
 		{
-			if (table[i].data == Temp_Vertex) return table[i].id_v;
+			if (table[i].data == tmp_vertex) return table[i].id_v;
 		}
 		return -1;
 	}
+	void Add_Vertex(TVertex tmp_source) {
+		if (Index(tmp_source) != -1) {
+			vertex new_vertex;
+			new_vertex.id_v = table.size();
+			new_vertex.data = tmp_source;
+			table.push_back(tmp_source);
+		}
+		else throw "That vertex already exists."
+	};
+
 };
