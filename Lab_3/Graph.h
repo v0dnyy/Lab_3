@@ -15,5 +15,5 @@ private:
 		TVertex source;
 		vector<destination> dest;
 	};
-	vector<vertex> table;
+	vector<vertex> table; 
 };
