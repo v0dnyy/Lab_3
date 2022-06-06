@@ -51,7 +51,8 @@ template<>
 struct equal_to<Vertex> {
 	size_t operator()(const Vertex& v1, const Vertex& v2) {
 		return((v1.id == v2.id) && (v1.amount == v2.amount));
-}
+	}
+};
 template <typename TVertex, typename TEdge, typename equal = equal_to<Vertex>>
 class Graph {
 	vector<vector<TEdge>> edge;
