@@ -47,6 +47,11 @@ struct Vertex{
 	}
 	Vertex(const string& str, const size_t& am) : id(str), amount(am), colour(0) {}
 };
+template<>
+struct equal_to<Vertex> {
+	size_t operator()(const Vertex& v1, const Vertex& v2) {
+		return((v1.id == v2.id) && (v1.amount == v2.amount));
+}
 template <typename TVertex, typename TEdge, typename equal = equal_to<Vertex>>
 class Graph {
 	vector<vector<TEdge>> edge;
