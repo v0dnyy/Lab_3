@@ -56,7 +56,7 @@ struct equal_to<Vertex> {
 template <typename TVertex, typename TEdge, typename equal = equal_to<Vertex>>
 class Graph {
 	vector<vector<TEdge>> edge;
-	vector<TVertex> vertex;
+	vector<TVertex> vertex_table;
 	size_t count;
 	bool check(vector<TVertex>& tmp, const string& str) const {
 		for (size_t i = 0; i < tmp.size(); ++i) {
@@ -65,25 +65,25 @@ class Graph {
 		return false;
 	}
 	int checker(const string& str) const {
-		for (size_t i = 0; i < vertex.size(); ++i) {
-			if (str == vertex[i].id) return i;
+		for (size_t i = 0; i < vertex_table.size(); ++i) {
+			if (str == vertex_table[i].id) return i;
 		}
 		return -1;
 	}
 public:
 	int Get_ID(const TVertex& rhs) const {
 		equal compare;
-		for (size_t i = 0; i < vertex.size(); ++i)
+		for (size_t i = 0; i < vertex_table.size(); ++i)
 		{
-			if (compare(rhs, vertex[i]))
+			if (compare(rhs, vertex_table[i]))
 				return i;
 		}
 		return -1;
 	}
 	int Get_ID(const string& rhs) const {
-		for (size_t i = 0; i < vertex.size(); ++i)
+		for (size_t i = 0; i < vertex_table.size(); ++i)
 		{
-			if (vertex[i].id == rhs)
+			if (vertex_table[i].id == rhs)
 				return i;
 		}
 		return -1;
@@ -93,7 +93,7 @@ public:
 	}
 	bool findVertex(const TVertex& f) const {
 		equal compare;
-		for (auto it : vertex) {
+		for (auto it : vertex_table) {
 			if (compare(it, f)) return true;
 		}
 		return false;
@@ -101,7 +101,7 @@ public:
 	void addVertex(const TVertex& newVertex)
 	{
 		if (findVertex(newVertex) == true) return;
-		vertex.push_back(newVertex);
+		vertex_table.push_back(newVertex);
 		vector<TEdge> tmp(0);
 		edge.push_back(tmp);
 		count++;
@@ -110,11 +110,11 @@ public:
 		equal compare;
 		int ind = -1;
 		string temp;
-		for (size_t i = 0; i < vertex.size(); ++i) {
-			if (compare(vertex[i], target)) {
+		for (size_t i = 0; i < vertex_table.size(); ++i) {
+			if (compare(vertex_table[i], target)) {
 				ind = i;
-				temp = vertex[i].id;
-				vertex.erase(vertex.begin() + i);
+				temp = vertex_table[i].id;
+				vertex_table.erase(vertex_table.begin() + i);
 				break;
 			}
 		}
@@ -132,8 +132,8 @@ public:
 	void addEdge(const TVertex& src, const TVertex& dst, const TEdge& newEdge) {
 		if (findVertex(src) == false || findVertex(dst) == false) return;
 		equal compare;
-		for (size_t i = 0; i < vertex.size(); ++i) {
-			if (compare(src, vertex[i])) {
+		for (size_t i = 0; i < vertex_table.size(); ++i) {
+			if (compare(src, vertex_table[i])) {
 				edge[i].push_back(newEdge);
 				return;
 			}
@@ -143,8 +143,8 @@ public:
 		if (findVertex(src) == false || findVertex(dst) == false) return;
 		int ind = -1;
 		equal compare;
-		for (size_t i = 0; i < vertex.size(); ++i) {
-			if (compare(vertex[i], src)) {
+		for (size_t i = 0; i < vertex_table.size(); ++i) {
+			if (compare(vertex_table[i], src)) {
 				ind = i;
 				break;
 			}
@@ -153,6 +153,39 @@ public:
 			if (edge[ind][i].dest == dst.id) {
 				edge[ind].erase(edge[ind].begin() + i);
 			}
+		}
+	}
+	void BFS(const TVertex& from) {
+		if (Get_ID(from) == -1) throw "That city is nit exist";
+		for (auto elem : vertex_table)
+		{
+			elem.colour = false;
+		}
+		queue<Vertex> q;
+		equal compare;
+		Vertex s;
+		for (size_t i = 0; i < vertex_table.size(); ++i) {
+			if (compare(vertex_table[i], from)) {
+				s = vertex_table[i];
+				vertex_table[i].colour = true;
+				break;
+			}
+		}
+		q.push(s);
+		while (!q.empty()) {
+			Vertex u = q.front();
+			q.pop();
+			int t = Get_ID(u);
+			for (auto elem : edge[t])
+			{
+				Vertex& v = vertex_table[Get_ID(elem.dest)];
+				if (v.colour == false)
+				{
+					v.colour = true;
+					q.push(v);
+				}
+			}
+			cout << u.id << endl;
 		}
 	}
 };
