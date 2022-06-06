@@ -1,55 +1,50 @@
 #include <iostream>
-#include <vector>
 #include <string>
 #include "Graph.h"
 
-using namespace std;
-
-int main()
-{
-    Graph<std::string, double> g;
-    g.Add_Vertex("Samara");
-    g.Add_Vertex("Saint-Peterburg");
-    g.Add_Vertex("Moscow");
-    g.Add_Vertex("Minsk");
-    g.Add_Vertex("Kiev");
-    g.Add_Vertex("Omsk");
-    g.Add_Vertex("Vladivostok");
-    g.Add_Edge("Samara", "Saint-Peterburg", 1740);
-    g.Add_Edge("Moscow", "Saint-Peterburg", 780);
-    g.Add_Edge("Samara", "Moscow", 1055);
-    g.Add_Edge("Moscow", "Minsk", 1378);
-    g.Add_Edge("Minsk", "Saint-Peterburg", 1100);
-    g.Add_Edge("Minsk", "Kiev", 655);
-    g.Add_Edge("Vladivostok", "Omsk", 5000);
-    g.Add_Edge("Saint-Peterburg", "Vladivostok", 11987);
-
-    g.Print();
-    cout << "===========================" << endl;
-    //g.BFS("Samara");
-    cout << "===========================" << endl;
-    g.Delete_Edge("Samara", "Saint-Peterburg");
-    g.Delete_Edge("Minsk", "Saint-Peterburg");
-    g.Print();
-    cout << "===========================" << endl;
-    try
-    {
-        g.Delete_Vertex("Kiev");
-    }
-    catch (const char* err)
-    {
-        cout << err << endl;
-    }
-    cout << "===========================" << endl;
-    try {
-        g.Delete_Vertex("Kiev");
-    }
-    catch (const char* err)
-    {
-        cout << err << endl;
-    }
-    g.Print();
-    cout << "===========================" << endl;
-
-    return 0;
+int main() {
+	Graph<Vertex, Edge> g;
+	g.addVertex(Vertex("Samara", 15));
+	g.addVertex(Vertex("Moscow", 20));
+	g.addVertex(Vertex("SaintP", 17));
+	g.addVertex(Vertex("Novosibirsk", 5));
+	g.addVertex(Vertex("Omsk", 11));
+	g.addVertex(Vertex("Kazan", 9));
+	//g.deleteVertex(Vertex("Samara", 15));
+	g.addVertex(Vertex("Krasnoyarsk", 13));
+	g.addVertex(Vertex("Kuraka", 3));
+	g.addVertex(Vertex("Temp", 5));
+	g.addEdge(Vertex("Samara", 15), Vertex("Moscow", 20), Edge("Moscow", 100));
+	g.addEdge(Vertex("Samara", 15), Vertex("Kazan", 9), Edge("Kazan", 33));
+	g.addEdge(Vertex("Samara", 15), Vertex("Kuraka", 3), Edge("Kuraka", 27));
+	g.addEdge(Vertex("Moscow", 20), Vertex("Novosibirsk", 5), Edge("Novosibirsk", 16));
+	g.addEdge(Vertex("Moscow", 20), Vertex("Omsk", 11), Edge("Omsk", 9));
+	g.addEdge(Vertex("SaintP", 17), Vertex("Samara", 15), Edge("Samara", 11));
+	g.addEdge(Vertex("SaintP", 17), Vertex("Kuraka", 3), Edge("Kuraka", 49));
+	g.addEdge(Vertex("SaintP", 17), Vertex("Omsk", 11), Edge("Omsk", 78));
+	//g.addEdge(Vertex("Novosibirsk", 5), Vertex("Moscow", 20), Edge("Moscow", 5));
+	g.addEdge(Vertex("Novosibirsk", 5), Vertex("Kazan", 9), Edge("Kazan", 81));
+	g.addEdge(Vertex("Novosibirsk", 5), Vertex("Omsk", 11), Edge("Omsk", 1));
+	g.addEdge(Vertex("Omsk", 11), Vertex("Kazan", 9), Edge("Kazan", 21));
+	g.addEdge(Vertex("Omsk", 11), Vertex("Samara", 15), Edge("Samara", 37));
+	g.addEdge(Vertex("Kazan", 9), Vertex("Kuraka", 3), Edge("Kuraka", 21));
+	g.addEdge(Vertex("Kazan", 9), Vertex("Kazan", 9), Edge("SaintP", 20));
+	g.addEdge(Vertex("Krasnoyarsk", 13), Vertex("Samara", 15), Edge("Samara", 115));
+	g.addEdge(Vertex("Krasnoyarsk", 13), Vertex("Kazan", 9), Edge("Kazan", 63));
+	g.addEdge(Vertex("Krasnoyarsk", 13), Vertex("SaintP", 17), Edge("SaintP", 21));
+	g.addEdge(Vertex("Kuraka", 3), Vertex("Samara", 15), Edge("Samara", 125));
+	g.addEdge(Vertex("Kuraka", 3), Vertex("Krasnoyarsk", 13), Edge("Krasnoyarsk", 50));
+	g.addEdge(Vertex("Temp", 5), Vertex("Krasnoyarsk", 13), Edge("Krasnoyarsk", 5));
+	g.deleteEdge(Vertex("Temp", 5), Vertex("Krasnoyarsk", 13));
+	g.print();
+	//std::cout << g.bfs(Vertex("Temp", 5), Vertex("Krasnoyarsk", 13));
+	//std::vector<Vertex>path = g.dijkstra(Vertex("Temp", 5), Vertex("Kuraka", 3));
+	try
+	{
+		g.BFS(Vertex("Omsk", 11));
+	}
+	catch (const char* g)
+	{
+		cout << g;
+	}
 }
