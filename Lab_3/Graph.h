@@ -149,6 +149,16 @@ public:
 		edge.push_back(tmp);
 		count++;
 	}
+	void addEdge(const TVertex& src, const TVertex& dst, const TEdge& newEdge) {
+		if (findVertex(src) == false || findVertex(dst) == false) return;
+		equal compare;
+		for (size_t i = 0; i < vertex_table.size(); ++i) {
+			if (compare(src, vertex_table[i])) {
+				edge[i].push_back(newEdge);
+				return;
+			}
+		}
+	}
 	void deleteVertex(const TVertex& target) {
 		equal compare;
 		int ind = -1;
@@ -171,16 +181,6 @@ public:
 			}
 		}
 		--count;
-	}
-	void addEdge(const TVertex& src, const TVertex& dst, const TEdge& newEdge) {
-		if (findVertex(src) == false || findVertex(dst) == false) return;
-		equal compare;
-		for (size_t i = 0; i < vertex_table.size(); ++i) {
-			if (compare(src, vertex_table[i])) {
-				edge[i].push_back(newEdge);
-				return;
-			}
-		}
 	}
 	void deleteEdge(const TVertex& src, const TVertex& dst) {
 		if (findVertex(src) == false || findVertex(dst) == false) return;
@@ -232,7 +232,7 @@ public:
 		}
 	}
 	vector<TVertex> dijkstra(const TVertex& src, const TVertex& dst) {
-		std::vector<TVertex> path_to_dst;
+		vector<TVertex> path_to_dst;
 		if (findVertex(src) == false || findVertex(dst) == false) return path_to_dst;
 		vector<int> parent(vertex_table.size(), -1);
 		vector<double> length(vertex_table.size());
@@ -242,8 +242,8 @@ public:
 			if (i == new_min) continue;
 			length[i] = INT32_MAX;
 		}
-		length[checker(src.id)] = 0;
-		checked[checker(src.id)] = true;
+		length[new_min] = 0;
+		checked[new_min] = true;
 		double result = dijkstr(length, checked, src, dst, parent);
 		if (result == INT32_MAX) {
 			cout << "Path doesnt exist" << endl;
@@ -259,8 +259,6 @@ public:
 			path_to_dst.push_back(vertex_table[path[i]]);
 		}
 		for (size_t i = 0; i < path.size() - 1; ++i) {
-			int type = 0;
-			int pay = 0;
 			int ch = checker(path_to_dst[i].id);
 			double sum = 0;
 			for (size_t j = 0; j < edge[ch].size(); ++j) {

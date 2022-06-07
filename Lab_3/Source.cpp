@@ -36,13 +36,14 @@ int main() {
 	g.deleteEdge(Vertex("Austin", 978908), Vertex("Dallas", 1343573));
 	g.print();
 	//cout << g.bfs(Vertex("Austin", 978908), Vertex("Dallas", 1343573));
-	//vector<Vertex>path = g.dijkstra(Vertex("Temp", 5), Vertex("Houston", 2320268));
-	try
-	{
-		g.BFS(Vertex("San Antonio", 1547253));
-	}
-	catch (const char* g)
-	{
-		cout << g;
-	}
+	vector<Vertex>path = g.dijkstra(Vertex("New York", 8336817), Vertex("Philadelphia", 1584064));
+	//try
+	//{
+	//	g.BFS(Vertex("San Antonio", 1547253));
+	//}
+	//catch (const char* g)
+	//{
+	//	cout << g;
+	//}
+	return 0;
 }
