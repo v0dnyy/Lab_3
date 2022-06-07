@@ -4,44 +4,42 @@
 
 int main() {
 	Graph<Vertex, Edge> g;
-	g.addVertex(Vertex("Samara", 15));
-	g.addVertex(Vertex("Moscow", 20));
-	g.addVertex(Vertex("SaintP", 17));
-	g.addVertex(Vertex("Novosibirsk", 5));
-	g.addVertex(Vertex("Omsk", 11));
-	g.addVertex(Vertex("Kazan", 9));
-	//g.deleteVertex(Vertex("Samara", 15));
-	g.addVertex(Vertex("Krasnoyarsk", 13));
-	g.addVertex(Vertex("Kuraka", 3));
-	g.addVertex(Vertex("Temp", 5));
-	g.addEdge(Vertex("Samara", 15), Vertex("Moscow", 20), Edge("Moscow", 100));
-	g.addEdge(Vertex("Samara", 15), Vertex("Kazan", 9), Edge("Kazan", 33));
-	g.addEdge(Vertex("Samara", 15), Vertex("Kuraka", 3), Edge("Kuraka", 27));
-	g.addEdge(Vertex("Moscow", 20), Vertex("Novosibirsk", 5), Edge("Novosibirsk", 16));
-	g.addEdge(Vertex("Moscow", 20), Vertex("Omsk", 11), Edge("Omsk", 9));
-	g.addEdge(Vertex("SaintP", 17), Vertex("Samara", 15), Edge("Samara", 11));
-	g.addEdge(Vertex("SaintP", 17), Vertex("Kuraka", 3), Edge("Kuraka", 49));
-	g.addEdge(Vertex("SaintP", 17), Vertex("Omsk", 11), Edge("Omsk", 78));
-	//g.addEdge(Vertex("Novosibirsk", 5), Vertex("Moscow", 20), Edge("Moscow", 5));
-	g.addEdge(Vertex("Novosibirsk", 5), Vertex("Kazan", 9), Edge("Kazan", 81));
-	g.addEdge(Vertex("Novosibirsk", 5), Vertex("Omsk", 11), Edge("Omsk", 1));
-	g.addEdge(Vertex("Omsk", 11), Vertex("Kazan", 9), Edge("Kazan", 21));
-	g.addEdge(Vertex("Omsk", 11), Vertex("Samara", 15), Edge("Samara", 37));
-	g.addEdge(Vertex("Kazan", 9), Vertex("Kuraka", 3), Edge("Kuraka", 21));
-	g.addEdge(Vertex("Kazan", 9), Vertex("Kazan", 9), Edge("SaintP", 20));
-	g.addEdge(Vertex("Krasnoyarsk", 13), Vertex("Samara", 15), Edge("Samara", 115));
-	g.addEdge(Vertex("Krasnoyarsk", 13), Vertex("Kazan", 9), Edge("Kazan", 63));
-	g.addEdge(Vertex("Krasnoyarsk", 13), Vertex("SaintP", 17), Edge("SaintP", 21));
-	g.addEdge(Vertex("Kuraka", 3), Vertex("Samara", 15), Edge("Samara", 125));
-	g.addEdge(Vertex("Kuraka", 3), Vertex("Krasnoyarsk", 13), Edge("Krasnoyarsk", 50));
-	g.addEdge(Vertex("Temp", 5), Vertex("Krasnoyarsk", 13), Edge("Krasnoyarsk", 5));
-	g.deleteEdge(Vertex("Temp", 5), Vertex("Krasnoyarsk", 13));
+	g.addVertex(Vertex("New York", 8336817));
+	g.addVertex(Vertex("Los Angeles", 3979576));
+	g.addVertex(Vertex("Chicago", 2693976));
+	g.addVertex(Vertex("Houston", 2320268));
+	g.addVertex(Vertex("Phoenix", 1680992));
+	g.addVertex(Vertex("Philadelphia", 1584064));
+	g.addVertex(Vertex("San Antonio", 1547253));
+	g.addVertex(Vertex("Dallas", 1343573));
+	g.addVertex(Vertex("Austin", 978908));
+	g.addEdge(Vertex("New York", 8336817), Vertex("Los Angeles", 3979576), Edge("Los Angeles", 500));
+	g.addEdge(Vertex("New York", 8336817), Vertex("Chicago", 2693976), Edge("Chicago", 600));
+	g.addEdge(Vertex("New York", 8336817), Vertex("Houston", 2320268), Edge("Houston", 750));
+	g.addEdge(Vertex("Los Angeles", 3979576), Vertex("Phoenix", 1680992), Edge("Phoenix", 650));
+	g.addEdge(Vertex("Los Angeles", 3979576), Vertex("San Antonio", 1547253), Edge("San Antonio", 300));
+	g.addEdge(Vertex("Philadelphia", 1584064), Vertex("New York", 8336817), Edge("New York", 250));
+	g.addEdge(Vertex("Philadelphia", 1584064), Vertex("Houston", 2320268), Edge("Houston", 140));
+	g.addEdge(Vertex("Philadelphia", 1584064), Vertex("San Antonio", 1547253), Edge("San Antonio", 150));
+	g.addEdge(Vertex("Phoenix", 1680992), Vertex("Los Angeles", 3979576), Edge("Los Angeles", 444));
+	g.addEdge(Vertex("Phoenix", 1680992), Vertex("Chicago", 2693976), Edge("Chicago", 800));
+	g.addEdge(Vertex("Phoenix", 1680992), Vertex("San Antonio", 1547253), Edge("San Antonio", 700));
+	g.addEdge(Vertex("San Antonio", 1547253), Vertex("Chicago", 2693976), Edge("Chicago", 820));
+	g.addEdge(Vertex("San Antonio", 1547253), Vertex("New York", 8336817), Edge("New York", 958));
+	g.addEdge(Vertex("Chicago", 2693976), Vertex("Houston", 2320268), Edge("Houston", 344));
+	g.addEdge(Vertex("Dallas", 1343573), Vertex("New York", 8336817), Edge("New York", 250));
+	g.addEdge(Vertex("Dallas", 1343573), Vertex("Chicago", 2693976), Edge("Chicago", 555));
+	g.addEdge(Vertex("Dallas", 1343573), Vertex("Philadelphia", 1584064), Edge("Philadelphia", 333));
+	g.addEdge(Vertex("Houston", 2320268), Vertex("New York", 8336817), Edge("New York", 222));
+	g.addEdge(Vertex("Houston", 2320268), Vertex("Dallas", 1343573), Edge("Dallas", 111));
+	g.addEdge(Vertex("Austin", 978908), Vertex("Dallas", 1343573), Edge("Dallas", 146));
+	g.deleteEdge(Vertex("Austin", 978908), Vertex("Dallas", 1343573));
 	g.print();
-	//std::cout << g.bfs(Vertex("Temp", 5), Vertex("Krasnoyarsk", 13));
-	//std::vector<Vertex>path = g.dijkstra(Vertex("Temp", 5), Vertex("Kuraka", 3));
+	//cout << g.bfs(Vertex("Austin", 978908), Vertex("Dallas", 1343573));
+	//vector<Vertex>path = g.dijkstra(Vertex("Temp", 5), Vertex("Houston", 2320268));
 	try
 	{
-		g.BFS(Vertex("Omsk", 11));
+		g.BFS(Vertex("San Antonio", 1547253));
 	}
 	catch (const char* g)
 	{
